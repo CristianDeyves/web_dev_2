@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     function validarNome(nome) {
         nome = nome.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
         nome = nome.slice(0, 37);
@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function() {
         valor = valor.replace(/\D/g, '');
         valor = formatarBirthDate(valor);
         birthDateInput.value = valor;
-        if(birthDateInput.value.length<10 && birthDateInput.value.length!==0){
+        if (birthDateInput.value.length < 10 && birthDateInput.value.length !== 0) {
             document.getElementById('birth-date-helper-text').innerHTML = '<span class="text-danger">Data inválida</span>'
-        }else{
+        } else {
             document.getElementById('birth-date-helper-text').innerHTML = '<span">DD/MM/AAAA</span>'
         }
     }
@@ -112,12 +112,10 @@ document.addEventListener("DOMContentLoaded", function() {
             if (password2 === '') {
                 document.getElementById('password-helper2').innerHTML = `<span>Deve ser igual a anterior</span>`
             }
+        } else if (password1.length < 8 || password1.length === '') {
+            document.getElementById('password-helper2').innerHTML = `<span>Deve ser igual a anterior</>`
         } else {
-            if (password1.length < 8 || password1.length === '') {
-                document.getElementById('password-helper2').innerHTML = `<span>Deve ser igual a anterior</>`
-            } else {
-                document.getElementById('password-helper2').innerHTML = `<span class="text-success">Senhas são iguais</span>`
-            }
+            document.getElementById('password-helper2').innerHTML = `<span class="text-success">Senhas são iguais</span>`
         }
     }
     document.getElementById('password2').addEventListener('input', handlePasswordInput2);
@@ -140,16 +138,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const handleCEPBlur = () => {
         let cepInput = document.getElementById('cep');
         let valor = cepInput.value;
-        if(valor===''){
+        if (valor === '') {
             return
         }
         valor = valor.replace(/\D/g, '');
-        valor = formatarCEP(valor);
-        cepInput.value = valor;
         while (valor.length < 8) {
             valor = '0' + valor;
         }
-        const cepNumber = valor
         valor = formatarCEP(valor)
         cepInput.value = valor;
         GetDataCep()
@@ -165,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
         try {
             const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
             const data = await response.json();
-            
+
             if (data.erro) {
                 document.getElementById('cep-helper-text').innerHTML = `<span class="text-danger">CEP não encontrado</>`
             } else {
@@ -173,20 +168,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 const uf = document.getElementById('uf')
                 const cidade = document.getElementById('city')
                 const bairro = document.getElementById('neighborhood')
-                
-                if(data.logradouro){
+
+                if (data.logradouro) {
                     logradouro.value = data.logradouro
                     logradouro.disabled = true
                 }
-                if(data.localidade){
+                if (data.localidade) {
                     cidade.value = data.localidade
                     cidade.disabled = true
                 }
-                if(data.uf){
+                if (data.uf) {
                     uf.value = data.uf
                     uf.disabled = true
                 }
-                if(data.bairro){
+                if (data.bairro) {
                     bairro.value = data.bairro
                     bairro.disabled = true
                 }
@@ -222,10 +217,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const elemento1 = document.getElementById('form-1');
         const elemento2 = document.getElementById('form-2');
         const alturaElemento1 = elemento1.offsetHeight;
-        if(!elemento2.offsetHeight>elemento2.offsetHeight){
+        if (!elemento2.offsetHeight > elemento2.offsetHeight) {
             elemento2.style.minHeight = `${alturaElemento1}px`;
-        }    
-    }  
+        }
+    }
     ajustarAltura();
     window.onload = ajustarAltura;
     window.addEventListener('resize', ajustarAltura);
@@ -241,18 +236,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const referenceOffsetTop = reference.offsetTop;
         const sizeNegativeReference = negativeReference.offsetHeight;
 
-        target.style.marginTop = `${referenceOffsetTop-negativeReferenceOffsetTop-sizeNegativeReference}px`;
+        target.style.marginTop = `${referenceOffsetTop - negativeReferenceOffsetTop - sizeNegativeReference}px`;
     }
 
     window.onload = updateTargetPosition;
     //---------------------------------------------------------------------------------------------------------------------
-    document.getElementById('back-button').addEventListener('click',(e)=>{
+    document.getElementById('back-button').addEventListener('click', (e) => {
         e.preventDefault()
         const fieldsetForm1 = document.getElementById('fieldset-form-1')
         const form1 = document.getElementById('form-1')
         const fieldsetForm2 = document.getElementById('fieldset-form-2')
         const form2 = document.getElementById('form-2')
-        
+
         fieldsetForm2.disabled = true
         fieldsetForm1.disabled = false
         form1.classList.add('bg-light')
