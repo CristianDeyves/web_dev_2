@@ -1,4 +1,3 @@
-// global.js
 document.addEventListener("DOMContentLoaded", function () {
     const path = window.location.pathname;
 
